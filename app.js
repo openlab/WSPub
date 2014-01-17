@@ -22,8 +22,11 @@ ws.on('open', function() {
 
 ws.on('message', function(data, flags) {
 
-    console.log('receiving data...');
-    message = "{ body: " + data + " }";
+   console.log('receiving data...');
+   //var message = { body: '' };
+   //message.body = JSON.stringify(data);
+   //message = JSON.stringify(data);
+   var message = JSON.stringify(data);
 
     console.log('sending message to service bus');
     sbService.sendTopicMessage(config.sbTopic, message, function(error){
