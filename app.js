@@ -1,12 +1,10 @@
 var azure = require('azure');
-var program = require('commander');
 var config = require('./config');
 var WebSocket = require('ws');
 var stdin = process.stdin;
 
 var sbService = azure.createServiceBusService(config.sbConnectionString);
 
-/*
 var ws = new WebSocket(config.sourceSocket);
 
 ws.on('open', function() {
@@ -25,8 +23,8 @@ ws.on('message', function(data, flags) {
 	}
     });
 });
-*/
 
+/*
 stdin.on('data', function(chunk) {
    var message = new Buffer(chunk).toString('base64');
    console.log('STDIN received, length in b64: ' + message.length);
@@ -39,3 +37,4 @@ stdin.on('data', function(chunk) {
 	}
     });
 });
+*/
