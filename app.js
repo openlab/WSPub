@@ -2,38 +2,40 @@ var azure = require('azure');
 var program = require('commander');
 var config = require('./config');
 var WebSocket = require('ws');
+var stdin = process.stdin;
 
 var sbService = azure.createServiceBusService(config.sbConnectionString);
 
-/*program
-    .version('0.0.1')
-    .option('-u, --url <url>')
-    .parse(process.argv);
-
-var ws = new WebSocket(program.url);*/
-
+/*
 var ws = new WebSocket(config.sourceSocket);
 
 ws.on('open', function() {
-    
-    console.log('connected');
-
+    console.log('Connected to ' + config.sourceSocket);
 });
 
 ws.on('message', function(data, flags) {
+   var message = new Buffer(data).toString('base64');
+   console.log('Message received, length in b64: ' + message.length);
 
-   console.log('receiving data...');
-   //var message = { body: '' };
-   //message.body = JSON.stringify(data);
-   //message = JSON.stringify(data);
-   var message = JSON.stringify(data);
-
-    console.log('sending message to service bus');
     sbService.sendTopicMessage(config.sbTopic, message, function(error){
         if(error) {
             console.error(error);
-        }
+        } else {
+	    console.log('Message written to ' + config.sbTopic);
+	}
     });
-    console.log('message sent!');
+});
+*/
 
+stdin.on('data', function(chunk) {
+   var message = new Buffer(chunk).toString('base64');
+   console.log('STDIN received, length in b64: ' + message.length);
+
+    sbService.sendTopicMessage(config.sbTopic, message, function(error){
+        if(error) {
+            console.error(error);
+        } else {
+	    console.log('Message written to ' + config.sbTopic);
+	}
+    });
 });
