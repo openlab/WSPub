@@ -1,7 +1,7 @@
 {
-  "name": "NodeWSRelay",
+  "name": "WSPub",
   "version": "0.0.0",
-  "description": "NodeWSRelay",
+  "description": "WSPub",
   "main": "app.js",
   "author": {
     "name": "SyntaxC4",
@@ -9,7 +9,6 @@
   },
   "dependencies": {
 	"ws": "*",
-	"commander": "*",
 	"azure": "*"
   }
 }
